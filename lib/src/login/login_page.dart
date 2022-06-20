@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  final LoginController _con = new LoginController();
+  final LoginController _con = LoginController();
 
   @override
   void initState() {
@@ -26,22 +26,22 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Positioned(top: -80, left: -100, child: _circleLogin()),
-              Positioned(top: 60, left: 25, child: _textLogin()),
-              Column(children: <Widget>[
+        child: Stack(
+          children: [
+            Positioned(top: -80, left: -100, child: _circleLogin()),
+            Positioned(top: 60, left: 25, child: _textLogin()),
+            SingleChildScrollView(
+              child: Column(children: <Widget>[
                 _animation(),
                 _textfieldLogin('Correo Electrónico', Icons.email),
                 _textfieldLogin('Contraseña', Icons.lock),
                 _botonIngreso(),
                 _textDontHaveAccount(),
               ]),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -51,17 +51,17 @@ class _LoginPageState extends State<LoginPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(
+        const Text(
           '¿No tienes cuenta?',
           style: TextStyle(
             color: MyColors.primaryColor,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 7,
         ),
         GestureDetector(
-          child: Text(
+          child: const Text(
             'Registrate',
             style: TextStyle(
                 color: MyColors.primaryColor, fontWeight: FontWeight.bold),
@@ -74,15 +74,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _botonIngreso() => Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+        margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: ElevatedButton(
           onPressed: () {},
-          child: Text('INGRESAR'),
+          child: const Text('INGRESAR'),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 15,
             ),
           ),
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Widget _textfieldLogin(String hintText, IconData iconData) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
         decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30),
@@ -98,11 +98,11 @@ class _LoginPageState extends State<LoginPage> {
         child: TextField(
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: MyColors.primaryColorDark,
             ),
             border: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
+            contentPadding: const EdgeInsets.all(15),
             prefixIcon: Icon(
               iconData,
               color: MyColors.primaryColor,
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _textLogin() => Text('LOGIN',
+  Widget _textLogin() => const Text('LOGIN',
       style: TextStyle(
         color: Colors.white,
         fontSize: 22,

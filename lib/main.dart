@@ -4,11 +4,11 @@ import 'package:flutter_delivery/src/register/register_page.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: 'login',
       routes: {
-        'login': (BuildContext context) => LoginPage(),
-        'register': (BuildContext context) => RegisterPage(),
+        'login': (BuildContext context) => const LoginPage(),
+        'register': (BuildContext context) => const RegisterPage(),
         },
     );
   }
