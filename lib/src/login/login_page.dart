@@ -15,13 +15,19 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         width: double.infinity,
         child: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            _imageBanner(),
-            _textfieldLogin('Correo Electrónico', Icons.email),
-            _textfieldLogin('Contraseña', Icons.lock),
-            _botonIngreso(),
-            _textDontHaveAccount(),
-          ]),
+          child: Stack(
+            children: [
+              Positioned(top: -80, left: -100, child: _circleLogin()),
+              Positioned(top: 60, left: 25, child: _textLogin()),
+              Column(children: <Widget>[
+                _imageBanner(),
+                _textfieldLogin('Correo Electrónico', Icons.email),
+                _textfieldLogin('Contraseña', Icons.lock),
+                _botonIngreso(),
+                _textDontHaveAccount(),
+              ]),
+            ],
+          ),
         ),
       ),
     );
@@ -95,4 +101,19 @@ class _LoginPageState extends State<LoginPage> {
       margin: EdgeInsets.only(
           top: 100, bottom: MediaQuery.of(context).size.height * 0.22),
       child: Image.asset('assets/img/delivery.png', width: 200, height: 200));
+
+  Widget _circleLogin() => Container(
+        width: 240,
+        height: 230,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          color: MyColors.primaryColor,
+        ),
+      );
+  
+  Widget _textLogin() => Text('LOGIN', style: TextStyle(
+    color: Colors.white,
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+  ));
 }
