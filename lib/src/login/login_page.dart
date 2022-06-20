@@ -15,39 +15,49 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         width: double.infinity,
         child: Column(children: <Widget>[
-          Image.asset('assets/img/delivery.png', width: 200, height: 200),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Correo Electrónico',
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Contraseña',
-            ),
-          ),
-          ElevatedButton(onPressed: () {}, child: Text('Ingresar')),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('¿No tienes cuenta?', style: TextStyle(
-                      color: MyColors.primaryColor,),),
-              SizedBox(
-                width: 7,
-              ),
-              FlatButton(
-                child: Text(
-                  'Registrate',
-                  style: TextStyle(
-                      color: MyColors.primaryColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {},
-              )
-            ],
-          ),
+          _imageBanner(),
+          _textfieldLogin('Correo Electrónico'),
+          _textfieldLogin('Contraseña'),
+          _botonIngreso(),
+          _textDontHaveAccount(),
         ]),
       ),
     );
+  }
+
+  Widget _textDontHaveAccount() {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('¿No tienes cuenta?', style: TextStyle(
+                    color: MyColors.primaryColor,),),
+            SizedBox(
+              width: 7,
+            ),
+            FlatButton(
+              child: Text(
+                'Registrate',
+                style: TextStyle(
+                    color: MyColors.primaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {},
+            )
+          ],
+        );
+  }
+
+  Widget _botonIngreso() => ElevatedButton(onPressed: () {}, child: Text('Ingresar'));
+
+  Widget _textfieldLogin(String hintText) {
+    return TextField(
+          decoration: InputDecoration(
+            hintText: hintText,
+          ),
+        );
+  }
+
+  Widget _imageBanner() {
+    return Image.asset('assets/img/delivery.png', width: 200, height: 200);
   }
 }
