@@ -39,12 +39,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(children: <Widget>[
                   _imageUser(),
                   const SizedBox(height: 10),
-                  _textfield('Correo Electrónico', Icons.email),
-                  _textfield('Nombre', Icons.person),
-                  _textfield('Apellido', Icons.person_outline),
-                  _textfield('Teléfono', Icons.phone),
-                  _textfield('Contraseña', Icons.lock),
-                  _textfield('Confirmar Contraseña', Icons.lock_outline),
+                  _textfield('Correo Electrónico', Icons.email, TextInputType.emailAddress, _con.emailController, false),
+                  _textfield('Nombre', Icons.person, TextInputType.text, _con.nameController, false),
+                  _textfield('Apellido', Icons.person_outline, TextInputType.text, _con.lastNameController, false),
+                  _textfield('Teléfono', Icons.phone, TextInputType.phone, _con.phoneController, false),
+                  _textfield('Contraseña', Icons.lock, TextInputType.text, _con.passwordController, true),
+                  _textfield('Confirmar Contraseña', Icons.lock_outline, TextInputType.text, _con.confirmPasswordController, true),
                   _botonRegistro(),
                 ]),
               ),
@@ -83,13 +83,16 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.grey[200],
       );
 
-  Widget _textfield(String hintText, IconData iconData) => Container(
+  Widget _textfield(String hintText, IconData iconData, TextInputType textInputType, TextEditingController textController, bool isPassword) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
         decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30),
         ),
         child: TextField(
+          keyboardType: textInputType,
+          controller: textController,
+          obscureText: isPassword,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(
@@ -109,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: _con.register,
           child: const Text('INGRESAR'),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(

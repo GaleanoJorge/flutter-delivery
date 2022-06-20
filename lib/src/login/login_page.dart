@@ -35,8 +35,8 @@ class _LoginPageState extends State<LoginPage> {
             SingleChildScrollView(
               child: Column(children: <Widget>[
                 _animation(),
-                _textfieldLogin('Correo Electrónico', Icons.email),
-                _textfieldLogin('Contraseña', Icons.lock),
+                _textfieldLogin('Correo Electrónico', Icons.email, TextInputType.emailAddress, _con.emailController, false),
+                _textfieldLogin('Contraseña', Icons.lock, TextInputType.text, _con.passwordController, true),
                 _botonIngreso(),
                 _textDontHaveAccount(),
               ]),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: _con.login,
           child: const Text('INGRESAR'),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
@@ -89,13 +89,16 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _textfieldLogin(String hintText, IconData iconData) => Container(
+  Widget _textfieldLogin(String hintText, IconData iconData, TextInputType textInputType, TextEditingController textController, bool isPassword) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
         decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30),
         ),
         child: TextField(
+          controller: textController,
+          keyboardType: textInputType,
+          obscureText: isPassword,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(
