@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/login/login_page.dart';
+import 'package:flutter_delivery/src/register/register_page.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 void main() {
@@ -34,9 +35,13 @@ class _MyAppState extends State<MyApp> {
               800: const Color.fromRGBO(231, 13, 50, 0.9),
               900: const Color.fromRGBO(231, 13, 50, 1),
             }),
+            fontFamily: 'NimbusSans',
       ),
       initialRoute: 'login',
-      routes: {'login': (BuildContext context) => LoginPage()},
+      routes: {
+        'login': (BuildContext context) => LoginPage(),
+        'register': (BuildContext context) => RegisterPage(),
+        },
     );
   }
 }
