@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
               Positioned(top: -80, left: -100, child: _circleLogin()),
               Positioned(top: 60, left: 25, child: _textLogin()),
               Column(children: <Widget>[
-                _imageBanner(),
+                _animation(),
                 _textfieldLogin('Correo Electrónico', Icons.email),
                 _textfieldLogin('Contraseña', Icons.lock),
                 _botonIngreso(),
@@ -97,10 +98,16 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _imageBanner() => Container(
+  // Widget _imageBanner() => Container(
+  //     margin: EdgeInsets.only(
+  //         top: 100, bottom: MediaQuery.of(context).size.height * 0.22),
+  //     child: Image.asset('assets/img/delivery.png', width: 200, height: 200));
+
+  Widget _animation() => Container(
       margin: EdgeInsets.only(
-          top: 100, bottom: MediaQuery.of(context).size.height * 0.22),
-      child: Image.asset('assets/img/delivery.png', width: 200, height: 200));
+          top: 100, bottom: MediaQuery.of(context).size.height * 0.09),
+      child: Lottie.asset('assets/json/delivery.json',
+          width: 350, height: 200, fit: BoxFit.fill));
 
   Widget _circleLogin() => Container(
         width: 240,
@@ -110,10 +117,11 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryColor,
         ),
       );
-  
-  Widget _textLogin() => Text('LOGIN', style: TextStyle(
-    color: Colors.white,
-    fontSize: 22,
-    fontWeight: FontWeight.bold,
-  ));
+
+  Widget _textLogin() => Text('LOGIN',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      ));
 }
