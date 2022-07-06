@@ -7,21 +7,21 @@ String responseApiToJson(ResponseApi data) => json.encode(data.toJson());
 
 class ResponseApi {
   late String message;
-  late String error;
-  late bool succes;
+  late dynamic error;
+  late bool success;
   late dynamic data;
 
   ResponseApi({
     required this.message,
     required this.error,
-    required this.succes,
+    required this.success,
     required this.data,
   });
 
   ResponseApi.fromJson(Map<String, dynamic> json) {
     message = json["message"];
     error = json["error"];
-    succes = json["succes"];
+    success = json["success"];
 
     try {
       data = json['data'];
@@ -33,7 +33,7 @@ class ResponseApi {
   Map<String, dynamic> toJson() => {
         "message": message,
         "error": error,
-        "succes": succes,
+        "success": success,
         "data": data,
       };
 }
