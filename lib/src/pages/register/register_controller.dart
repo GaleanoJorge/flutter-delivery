@@ -62,4 +62,8 @@ class RegisterController {
 
     // print('Respuesta: ${responseApi?.toJson()}');
   }
+
+  void back() {
+    Navigator.pop(context!);
+  }
 }
