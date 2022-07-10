@@ -51,11 +51,13 @@ class RegisterController {
     }
 
     User user = User(
-        email: email,
-        name: name,
-        lastname: lastName,
-        phone: phone,
-        password: password);
+      email: email,
+      name: name,
+      lastname: lastName,
+      phone: phone,
+      password: password,
+      roles: [],
+    );
 
     ResponseApi? responseApi = await usersProvider.create(user);
     MySnackbar.show(context!, responseApi!.message);
