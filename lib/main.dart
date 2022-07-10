@@ -4,6 +4,7 @@ import 'package:flutter_delivery/src/pages/delivery/orders/list/delivery_orders_
 import 'package:flutter_delivery/src/pages/login/login_page.dart';
 import 'package:flutter_delivery/src/pages/register/register_page.dart';
 import 'package:flutter_delivery/src/pages/restaurant/orders/list/restaurant_orders_list_page.dart';
+import 'package:flutter_delivery/src/pages/roles/roles_page.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 void main() {
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'login': (BuildContext context) => const LoginPage(),
         'register': (BuildContext context) => const RegisterPage(),
+        'roles': (BuildContext context) => RolesPage(),
         'client/products/list': (BuildContext context) => ClientProductsListPage(),
         'restaurant/orders/list': (BuildContext context) => RestaurantOrdersListPage(),
         'delivery/orders/list': (BuildContext context) => DeliveryOrdersListPage(),
