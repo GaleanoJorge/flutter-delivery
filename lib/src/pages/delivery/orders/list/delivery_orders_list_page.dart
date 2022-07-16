@@ -18,22 +18,29 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _con.key,
-      appBar: AppBar(
-        leading: _menuDrawer(),
-      ),
-      drawer: _drawer(),
-      body: Center(
-        child: Text('DELIVERY ORDERS LIST'),
-      ),
-    );
+    return _con.isInited
+        ? Scaffold(
+            key: _con.key,
+            appBar: AppBar(
+              leading: _menuDrawer(),
+            ),
+            drawer: _drawer(),
+            body: Center(
+              child: ElevatedButton(
+                child: const Text('Cerrar sesión'),
+                onPressed: _con.logout,
+              ),
+            ),
+          )
+        : const Scaffold(
+            body: Text(''),
+          );
   }
 
   Widget _menuDrawer() {
@@ -56,22 +63,22 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: MyColors.primaryColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nombre de usuario',
-                    style: TextStyle(
+                    '${_con.user.name} ${_con.user.lastname}',
+                    style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                     maxLines: 1,
                   ),
                   Text(
-                    'Email',
+                    _con.user.email ?? '',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -80,7 +87,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    'Teléfono',
+                    _con.user.phone ?? '',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -90,20 +97,26 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                   ),
                   Container(
                     height: 60,
-                    margin: EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10),
                     child: FadeInImage(
-                      image: AssetImage('assets/img/no-image.png'),
+                      image: _con.user.image != null
+                          ? NetworkImage(_con.user.image)
+                          : const NetworkImage(
+                              "https://programacion.net/files/article/20161110041116_image-not-found.png"),
                       fit: BoxFit.contain,
-                      fadeInDuration: Duration(milliseconds: 50),
-                      placeholder: AssetImage('assets/img/no-image.png'),
+                      fadeInDuration: const Duration(milliseconds: 50),
+                      placeholder: const AssetImage('assets/img/no-image.png'),
                     ),
                   )
                 ],
               )),
-          ListTile(
-            title: Text('Seleccionar rol'),
-            trailing: Icon(Icons.person_outline),
-          ),
+          _con.user.roles.length > 1
+              ? ListTile(
+                  onTap: _con.goToRoles,
+                  title: const Text('Seleccionar rol'),
+                  trailing: const Icon(Icons.person_outline),
+                )
+              : Container(),
           ListTile(
             onTap: _con.logout,
             title: Text('Cerrar sesión'),
@@ -113,4 +126,6 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
       ),
     );
   }
+
+  void refresh() => setState(() {});
 }
