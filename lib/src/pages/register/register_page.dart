@@ -136,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
         child: ElevatedButton(
-          onPressed: _con.register,
+          onPressed: _con.isEnable ? _con.register : null,
           child: const Text('INGRESAR'),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
