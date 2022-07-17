@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/response_api.dart';
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterController {
   BuildContext? context;
+  late Function refresh;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -16,9 +20,15 @@ class RegisterController {
 
   UsersProvider usersProvider = UsersProvider();
 
-  Future? init(BuildContext context) async {
+  PickedFile? pickedFile;
+  File? imageFile;
+  bool isInited = false;
+
+  Future? init(BuildContext context, Function refresh) async {
     this.context = context;
-    this.usersProvider.init(context);
+    this.refresh = refresh;
+    usersProvider.init(context);
+    isInited = true;
   }
 
   void register() async {
@@ -67,6 +77,44 @@ class RegisterController {
         Navigator.pushReplacementNamed(context!, 'login');
       });
     }
+  }
+
+  Future selectImage(ImageSource imageSource) async {
+    pickedFile = (await ImagePicker().getImage(source: imageSource));
+    if (pickedFile != null) {
+      imageFile = File(pickedFile!.path);
+    }
+    Navigator.pop(context!);
+    refresh();
+  }
+
+  void showAlertDialog() {
+    Widget galleryButton = ElevatedButton(
+      onPressed: () {
+        selectImage(ImageSource.gallery);
+      },
+      child: const Text('GALERÍA'),
+    );
+    Widget cameraButton = ElevatedButton(
+      onPressed: () {
+        selectImage(ImageSource.camera);
+      },
+      child: const Text('CÁMARA'),
+    );
+
+    AlertDialog alertDialog = AlertDialog(
+      title: const Text('Selecciona tu imagen'),
+      actions: [
+        galleryButton,
+        cameraButton,
+      ],
+    );
+
+    showDialog(
+        context: context!,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 
   void back() {

@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
@@ -39,12 +39,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(children: <Widget>[
                   _imageUser(),
                   const SizedBox(height: 10),
-                  _textfield('Correo Electrónico', Icons.email, TextInputType.emailAddress, _con.emailController, false),
-                  _textfield('Nombre', Icons.person, TextInputType.text, _con.nameController, false),
-                  _textfield('Apellido', Icons.person_outline, TextInputType.text, _con.lastNameController, false),
-                  _textfield('Teléfono', Icons.phone, TextInputType.phone, _con.phoneController, false),
-                  _textfield('Contraseña', Icons.lock, TextInputType.text, _con.passwordController, true),
-                  _textfield('Confirmar Contraseña', Icons.lock_outline, TextInputType.text, _con.confirmPasswordController, true),
+                  _textfield('Correo Electrónico', Icons.email,
+                      TextInputType.emailAddress, _con.emailController, false),
+                  _textfield('Nombre', Icons.person, TextInputType.text,
+                      _con.nameController, false),
+                  _textfield('Apellido', Icons.person_outline,
+                      TextInputType.text, _con.lastNameController, false),
+                  _textfield('Teléfono', Icons.phone, TextInputType.phone,
+                      _con.phoneController, false),
+                  _textfield('Contraseña', Icons.lock, TextInputType.text,
+                      _con.passwordController, true),
+                  _textfield('Confirmar Contraseña', Icons.lock_outline,
+                      TextInputType.text, _con.confirmPasswordController, true),
                   _botonRegistro(),
                 ]),
               ),
@@ -77,13 +83,31 @@ class _RegisterPageState extends State<RegisterPage> {
         fontWeight: FontWeight.bold,
       ));
 
-  Widget _imageUser() => CircleAvatar(
-        backgroundImage: const AssetImage('assets/img/user_profile_2.png'),
-        radius: 50,
-        backgroundColor: Colors.grey[200],
+  Widget _imageUser() => GestureDetector(
+        onTap: _con.showAlertDialog,
+        child: CircleAvatar(
+          backgroundImage: _imageProvider(),
+          radius: 50,
+          backgroundColor: Colors.grey[200],
+        ),
       );
 
-  Widget _textfield(String hintText, IconData iconData, TextInputType textInputType, TextEditingController textController, bool isPassword) => Container(
+  ImageProvider _imageProvider() {
+    if (_con.isInited) {
+      if (_con.imageFile != null) {
+        return FileImage(_con.imageFile!);
+      }
+    }
+    return const AssetImage('assets/img/user_profile_2.png');
+  }
+
+  Widget _textfield(
+          String hintText,
+          IconData iconData,
+          TextInputType textInputType,
+          TextEditingController textController,
+          bool isPassword) =>
+      Container(
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
         decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
@@ -124,4 +148,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       );
+
+  void refresh() => setState(() {});
 }

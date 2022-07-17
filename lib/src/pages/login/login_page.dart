@@ -12,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final LoginController _con = LoginController();
 
   @override
@@ -23,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       _con.init(context);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +35,15 @@ class _LoginPageState extends State<LoginPage> {
             SingleChildScrollView(
               child: Column(children: <Widget>[
                 _animation(),
-                _textfieldLogin('Correo Electrónico', Icons.email, TextInputType.emailAddress, _con.emailController, false),
-                _textfieldLogin('Contraseña', Icons.lock, TextInputType.text, _con.passwordController, true),
+                _textfieldLogin('Correo Electrónico', Icons.email,
+                    TextInputType.emailAddress, _con.emailController, false),
+                _textfieldLogin('Contraseña', Icons.lock, TextInputType.text,
+                    _con.passwordController, true),
                 _botonIngreso(),
                 _textDontHaveAccount(),
+                const SizedBox(
+                  height: 30,
+                ),
               ]),
             ),
           ],
@@ -53,9 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       children: <Widget>[
         const Text(
           '¿No tienes cuenta?',
-          style: TextStyle(
-            color: MyColors.primaryColor,
-          ),
+          style: TextStyle(color: MyColors.primaryColor, fontSize: 17),
         ),
         const SizedBox(
           width: 7,
@@ -64,7 +67,9 @@ class _LoginPageState extends State<LoginPage> {
           child: const Text(
             'Registrate',
             style: TextStyle(
-                color: MyColors.primaryColor, fontWeight: FontWeight.bold),
+                color: MyColors.primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 17),
           ),
           onTap: _con.goToRegisterPage,
         )
@@ -89,7 +94,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _textfieldLogin(String hintText, IconData iconData, TextInputType textInputType, TextEditingController textController, bool isPassword) => Container(
+  Widget _textfieldLogin(
+          String hintText,
+          IconData iconData,
+          TextInputType textInputType,
+          TextEditingController textController,
+          bool isPassword) =>
+      Container(
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
         decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
