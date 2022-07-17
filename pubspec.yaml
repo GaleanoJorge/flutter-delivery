@@ -34,6 +34,7 @@ dependencies:
   shared_preferences: ^2.0.15 # guardado de información de manera local
   image_picker: ^0.8.5+3 # selección de imágenes desde cámara o galería
   sn_progress_dialog: ^1.0.8 # progess diialog
+  fluttertoast: ^8.0.9 # toast
 
 
   # The following adds the Cupertino Icons font to your application.

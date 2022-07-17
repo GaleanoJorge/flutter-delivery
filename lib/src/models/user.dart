@@ -16,7 +16,7 @@ class User {
   dynamic password;
   dynamic isAvailable;
   dynamic sessionToken;
-  List<Rol> roles = [];
+  dynamic roles;
 
   User({
     this.id,
@@ -28,7 +28,7 @@ class User {
     this.password,
     this.isAvailable,
     this.sessionToken,
-    required this.roles,
+    this.roles,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
